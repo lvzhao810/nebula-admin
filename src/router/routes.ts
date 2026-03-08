@@ -30,6 +30,16 @@ export const routes: RouteRecordRaw[] = [
         },
       },
       {
+        path: '/analytics',
+        name: 'Analytics',
+        component: () => import('@/views/analytics/index.vue'),
+        meta: {
+          title: '分析仪表板',
+          icon: 'BarChartOutlined',
+          requiresAuth: true,
+        },
+      },
+      {
         path: '/components',
         name: 'Components',
         component: () => import('@/views/components/index.vue'),
