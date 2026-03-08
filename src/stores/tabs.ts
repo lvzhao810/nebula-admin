@@ -17,7 +17,7 @@ export const useTabsStore = defineStore('tabs', () => {
 
   // 添加或切换到标签
   function addTab(route: TabRoute) {
-    const { path, meta } = route
+    const { path } = route
 
     // 排除特定路由
     if (TABS_CONFIG.EXCLUDED_ROUTES.some(r => path.startsWith(r))) {
@@ -146,7 +146,7 @@ export const useTabsStore = defineStore('tabs', () => {
   // 获取路由标题
   function getRouteTitle(route: TabRoute): string {
     if (route.meta?.title) {
-      return route.meta.title
+      return route.meta.title as string
     }
 
     // 从路由路径中提取标题

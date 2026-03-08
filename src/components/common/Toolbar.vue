@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h } from 'vue'
+import { h } from 'vue'
 import * as Icons from '@ant-design/icons-vue'
 
 interface ToolbarButton {
@@ -56,7 +56,7 @@ interface Props {
   showRefresh?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   buttons: () => [],
   showRefresh: false,
 })

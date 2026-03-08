@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { DownloadOutlined, FileOutlined } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import PdfViewer from './PdfViewer.vue'

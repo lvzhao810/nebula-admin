@@ -81,11 +81,11 @@ interface Props {
   showPrint?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   showPrint: true,
 })
 
-const emit = defineEmits<{
+defineEmits<{
   print: []
 }>()
 

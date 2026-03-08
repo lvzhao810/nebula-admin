@@ -40,11 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
-import type { TableProps } from 'ant-design-vue'
+import { ref, computed, watch } from 'vue'
 
 interface Props {
-  columns: TableProps['columns']
+  columns: any[]
   dataSource: any[]
   pagination?: any
 }

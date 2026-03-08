@@ -71,7 +71,6 @@ import {
   FileImageOutlined,
 } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
-import type { PreviewConfig } from './types'
 
 interface Props {
   url: string

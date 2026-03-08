@@ -48,7 +48,7 @@ const rightStyle = computed(() => {
   return { height: `${100 - percent.value}%` }
 })
 
-function startResize(e: MouseEvent) {
+function startResize() {
   isResizing.value = true
   document.addEventListener('mousemove', handleResize)
   document.addEventListener('mouseup', stopResize)

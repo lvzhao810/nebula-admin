@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { TableProps } from 'ant-design-vue'
 
 interface TreeNode {
   id: string | number
@@ -27,7 +26,7 @@ interface TreeNode {
 }
 
 interface Props {
-  columns: TableProps['columns']
+  columns: any[]
   dataSource: TreeNode[]
 }
 

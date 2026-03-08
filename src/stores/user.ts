@@ -29,7 +29,7 @@ interface UserState {
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     token: storage.getToken() || '',
-    userInfo: storage.getUserInfo(),
+    userInfo: storage.getUserInfo() as UserInfo | null,
     roles: storage.getRoles(),
     permissions: storage.getPermissions(),
   }),

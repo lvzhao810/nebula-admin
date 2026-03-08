@@ -1,7 +1,7 @@
 <template>
   <div class="drag-kanban">
     <div
-      v-for="(column, colIndex) in columns"
+      v-for="column in columns"
       :key="column.id"
       class="kanban-column"
     >

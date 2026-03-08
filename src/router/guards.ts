@@ -6,7 +6,7 @@ import { message } from 'ant-design-vue'
 const WHITE_LIST = ['/login', '/404', '/403']
 
 export function setupRouterGuard(router: Router) {
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to, _from, next) => {
     const userStore = useUserStore()
     const permissionStore = usePermissionStore()
     const token = userStore.token

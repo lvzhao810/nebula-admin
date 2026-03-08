@@ -62,7 +62,7 @@ interface Props {
   alt?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   alt: 'image',
 })
 

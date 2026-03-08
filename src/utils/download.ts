@@ -11,7 +11,7 @@ export async function downloadFile(
   url: string,
   config: DownloadConfig
 ): Promise<void> {
-  const { filename, format = 'blob', onProgress } = config
+  const { filename, onProgress } = config
 
   try {
     const response = await fetch(url)
@@ -50,7 +50,7 @@ export async function downloadFile(
     }
 
     // 合并数据块
-    const blob = new Blob(chunks)
+    const blob = new Blob(chunks as BlobPart[])
 
     // 创建下载链接
     const blobUrl = URL.createObjectURL(blob)

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, onUnmounted, computed } from 'vue'
+import { ref, onMounted, watch, onUnmounted } from 'vue'
 
 interface Props {
   startVal?: number
@@ -33,10 +33,6 @@ const emit = defineEmits<{
 const displayValue = ref(props.startVal.toFixed(props.decimals))
 let startTime: number | null = null
 let rafId: number | null = null
-
-const formatNumber = computed(() => (num: number) =>
-  props.prefix + num.toFixed(props.decimals) + props.suffix
-)
 
 const easing = (t: number) => t * (2 - t)
 

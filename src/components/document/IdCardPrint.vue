@@ -100,7 +100,7 @@ interface Props {
   showPrintBtn?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   showPrintBtn: true,
 })
 

@@ -115,10 +115,6 @@ import dayjs from 'dayjs'
 import StatCard from '@/components/common/StatCard.vue'
 import {
   PlusOutlined,
-  UserOutlined,
-  EyeOutlined,
-  ShoppingCartOutlined,
-  DollarOutlined,
 } from '@ant-design/icons-vue'
 
 const userStore = useUserStore()

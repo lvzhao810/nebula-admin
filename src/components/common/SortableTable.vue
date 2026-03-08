@@ -58,7 +58,7 @@ const tableColumns = computed(() => {
 })
 
 // 自定义行，让整行可拖拽
-const customRow = (record: any, index: number) => {
+const customRow = (record: any) => {
   return {
     class: {
       'dragging-row': draggedItem.value?.id === record.id,
