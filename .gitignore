@@ -29,8 +29,8 @@ Thumbs.db
 # Test
 playwright-report/
 test-results/
-test-results/
 screenshots/
+.playwright-mcp/
 
 # Environment
 .env.local
@@ -47,3 +47,7 @@ test-api.js
 docs/
 TypeScript快速上手教程.md
 运行教程.md
+
+# Claude Code / OMC
+.claude/settings.local.json
+.omc/

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772857053853,
-  "projectRoot": "/Users/lvzhao/Downloads/项目/claude-demo/nebula-admin",
+  "lastScanned": 1772947217387,
+  "projectRoot": "/Users/lvzhao/Downloads/项目/ai-poject/nebula-admin",
   "techStack": {
     "languages": [
       {
@@ -66,84 +66,34 @@
     "isMonorepo": false,
     "workspaces": [],
     "mainDirectories": [
-      "docs",
-      "public",
       "src",
       "tests"
     ],
-    "gitBranches": null
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
   },
   "customNotes": [],
   "directoryMap": {
-    "dist": {
-      "path": "dist",
-      "purpose": "Distribution/build output",
-      "fileCount": 1,
-      "lastAccessed": 1772857053787,
-      "keyFiles": [
-        "index.html"
-      ]
-    },
-    "docs": {
-      "path": "docs",
-      "purpose": "Documentation",
-      "fileCount": 0,
-      "lastAccessed": 1772857053787,
-      "keyFiles": []
-    },
-    "playwright-report": {
-      "path": "playwright-report",
-      "purpose": null,
-      "fileCount": 1,
-      "lastAccessed": 1772857053843,
-      "keyFiles": [
-        "index.html"
-      ]
-    },
-    "public": {
-      "path": "public",
-      "purpose": "Public files",
-      "fileCount": 0,
-      "lastAccessed": 1772857053844,
-      "keyFiles": []
-    },
-    "screenshots": {
-      "path": "screenshots",
-      "purpose": null,
-      "fileCount": 6,
-      "lastAccessed": 1772857053844,
-      "keyFiles": [
-        "ai-after-click.png",
-        "ai-after-send.png",
-        "ai-before-send.png",
-        "ai-chat-opened-test.png",
-        "ai-chat-opened.png"
-      ]
-    },
     "src": {
       "path": "src",
       "purpose": "Source code",
-      "fileCount": 4,
-      "lastAccessed": 1772857053845,
+      "fileCount": 5,
+      "lastAccessed": 1772947217367,
       "keyFiles": [
         "App.vue",
         "auto-imports.d.ts",
         "components.d.ts",
+        "env.d.ts",
         "main.ts"
       ]
-    },
-    "test-results": {
-      "path": "test-results",
-      "purpose": null,
-      "fileCount": 1,
-      "lastAccessed": 1772857053846,
-      "keyFiles": []
     },
     "tests": {
       "path": "tests",
       "purpose": "Test files",
       "fileCount": 7,
-      "lastAccessed": 1772857053847,
+      "lastAccessed": 1772947217368,
       "keyFiles": [
         "ai-assistant.spec.ts",
         "auth.spec.ts",
@@ -152,31 +102,11 @@
         "navigation.spec.ts"
       ]
     },
-    "dist/assets": {
-      "path": "dist/assets",
-      "purpose": "Static assets",
-      "fileCount": 81,
-      "lastAccessed": 1772857053848,
-      "keyFiles": [
-        "404-nDLlx8i6.js",
-        "AvatarUpload-Bp9SAcSC.js",
-        "AvatarUpload-D5nVxVBq.css"
-      ]
-    },
-    "playwright-report/data": {
-      "path": "playwright-report/data",
-      "purpose": "Data files",
-      "fileCount": 1,
-      "lastAccessed": 1772857053850,
-      "keyFiles": [
-        "cd6f238ad32fb2925f650e8a1d63664e384f5bf0.md"
-      ]
-    },
     "src/api": {
       "path": "src/api",
       "purpose": "API routes",
       "fileCount": 4,
-      "lastAccessed": 1772857053851,
+      "lastAccessed": 1772947217379,
       "keyFiles": [
         "auth.ts",
         "menu.ts",
@@ -187,21 +117,21 @@
       "path": "src/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1772857053851,
+      "lastAccessed": 1772947217380,
       "keyFiles": []
     },
     "src/components": {
       "path": "src/components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1772857053852,
+      "lastAccessed": 1772947217382,
       "keyFiles": []
     },
     "src/config": {
       "path": "src/config",
       "purpose": "Configuration files",
       "fileCount": 2,
-      "lastAccessed": 1772857053852,
+      "lastAccessed": 1772947217383,
       "keyFiles": [
         "components.ts",
         "components.types.ts"
@@ -210,10 +140,22 @@
   },
   "hotPaths": [
     {
-      "path": "",
+      "path": "CLAUDE.md",
+      "accessCount": 8,
+      "lastAccessed": 1772947335504,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
       "accessCount": 1,
-      "lastAccessed": 1772931439603,
-      "type": "directory"
+      "lastAccessed": 1772947250319,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 1,
+      "lastAccessed": 1772947250371,
+      "type": "file"
     }
   ],
   "userDirectives": []

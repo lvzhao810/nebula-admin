@@ -38,33 +38,29 @@ npm run test:headed # 有头模式运行 Playwright 测试
 
 ```
 src/
-├── api/           # API 服务层，包含类型化接口
-│   ├── auth.ts    # 认证相关 API
-│   ├── menu.ts    # 菜单相关 API
-│   ├── role.ts    # 角色相关 API
-│   └── user.ts    # 用户相关 API
+├── api/           # API 服务层
+│   ├── auth.ts    # 认证 (login, logout, getUserInfo)
+│   ├── menu.ts    # 菜单管理
+│   ├── role.ts    # 角色管理
+│   └── user.ts    # 用户管理
 ├── components/    # 可复用组件
-│   ├── common/    # 业务组件 (ProTable, FormModal, IconSelect 等)
+│   ├── ai/        # AI 助手组件 (ChatWindow, ModelSelect 等)
+│   ├── common/    # 业务组件 (ProTable, FormModal 等)
 │   └── layout/    # 布局组件 (AppHeader, AppMenu, TabsView, ThemeSwitcher)
 ├── composables/   # Vue 3 组合式函数 (自动导入)
-├── config/        # 组件配置文件
+├── config/        # 组件配置
 ├── constants/     # 常量定义
-├── layouts/       # 页面布局模板 (BasicLayout, BlankLayout)
-├── router/        # Vue Router 配置，支持动态路由
-│   ├── routes.ts  # 路由定义
-│   ├── index.ts   # 路由实例
-│   └── guards.ts  # 路由守卫
+├── layouts/       # 页面布局 (BasicLayout, BlankLayout, EmptyLayout)
+├── router/        # Vue Router (index.ts, routes.ts, guards.ts)
 ├── stores/        # Pinia 状态管理
-│   ├── user.ts        # 用户状态
-│   ├── menu.ts        # 菜单状态
-│   ├── permission.ts  # 权限状态
-│   ├── tabs.ts        # 标签页状态
-│   └── theme.ts       # 主题状态
+│   ├── user.ts        # 用户信息
+│   ├── menu.ts        # 菜单数据
+│   ├── permission.ts  # 权限控制
+│   ├── tabs.ts        # 标签页
+│   └── theme.ts       # 主题切换
 ├── types/         # TypeScript 类型定义
-│   ├── index.ts   # 通用类型 (UserInfo, MenuItem, Role 等)
-│   └── router.ts  # 路由相关类型
 ├── utils/         # 工具函数 (request, storage, permission)
-└── views/         # 按功能模块组织的页面组件
+└── views/         # 页面视图
 ```
 
 ### 自动导入配置
@@ -141,27 +137,7 @@ API 响应格式：`{ code: number, data: T, message: string }`
 
 ### 可复用组件 (src/components/common/)
 
-常用业务组件：
-- **ProTable**: 高级表格组件，支持分页、搜索、工具栏
-- **FormModal**: 表单弹窗组件
-- **IconSelect**: 图标选择器
-- **SearchBar**: 搜索栏组件
-- **EditableTable**: 可编辑表格
-- **SortableTable**: 可排序表格
-- **StatCard**: 统计卡片
-- **UploadImage**: 图片上传
-- **AvatarUpload**: 头像上传
-- **CodeViewer**: 代码查看器
-- **MarkdownEditor**: Markdown 编辑器
-- **RichTextEditor**: 富文本编辑器
-- **JsonEditor**: JSON 编辑器
-- **QrCode**: 二维码生成器
-- **ImagePreview**: 图片预览
-- **DragKanban**: 拖拽看板
-- **DragList**: 拖拽列表
-- **CountTo**: 数字动画
-- **BackToTop**: 返回顶部
-- **Sticky**: 吸顶组件
+核心业务组件：ProTable、FormModal、IconSelect、SearchBar、StatCard、UploadImage、AvatarUpload、CodeViewer、MarkdownEditor、RichTextEditor、JsonEditor、QrCode、DragKanban、DragList、CountTo、BackToTop、Sticky 等
 
 ## 默认凭据
 
@@ -254,78 +230,13 @@ API 响应格式：`{ code: number, data: T, message: string }`
 - **应该**在提交前运行 `npm run lint` 自动修复代码风格问题
 - **应该**为复杂的业务逻辑添加适当的注释（中文）
 
-## 重要类型定义 (src/types/)
+## 核心类型 (src/types/)
 
-### 核心类型
+- **UserInfo**: 用户信息 (id, username, nickname, avatar, roleId, roleName)
+- **MenuItem**: 菜单项 (id, parentId, title, path, type: 1=目录|2=菜单|3=按钮)
+- **Role**: 角色 (id, roleName, roleCode, permissions)
+- **ApiResponse\<T\>**: API 响应 `{ code, data, message }`
 
-**UserInfo**: 用户信息
-- `id`, `username`, `nickname`, `avatar`, `email`, `phone`
-- `status`, `roleId`, `roleName`, `createTime`
+## 核心依赖
 
-**MenuItem**: 菜单项
-- `id`, `parentId`, `title`, `path`, `icon`, `component`
-- `type`: 1=目录, 2=菜单, 3=按钮
-- `sort`, `status`, `permission`, `children`
-
-**Role**: 角色
-- `id`, `roleName`, `roleCode`, `description`, `status`
-- `permissions`, `createTime`
-
-**Permission**: 权限
-- `id`, `name`, `code`, `type`: 1=菜单, 2=按钮
-- `parentId`
-
-**RouteMeta**: 路由元信息
-- `title`, `permission`, `icon`, `hideInMenu`, `requiresAuth`, `keepAlive`
-
-### 通用类型
-
-**PageParams**: 分页参数 - `{ page, pageSize }`
-**PageResult\<T\>**: 分页响应 - `{ list, total, page, pageSize }`
-**ApiResponse\<T\>**: API 响应 - `{ code, data, message }`
-
-## 核心依赖库
-
-### UI 框架
-- **Vue 3.4**: 渐进式 JavaScript 框架
-- **Ant Design Vue 4.1**: UI 组件库
-- **TailwindCSS 3.4**: 原子化 CSS 框架
-- **@ant-design/icons-vue 7.0**: 图标库
-
-### 状态与路由
-- **Pinia 2.1**: Vue 状态管理
-- **Vue Router 4.3**: 官方路由管理器
-
-### 工具库
-- **axios 1.6**: HTTP 客户端
-- **VueUse 14.1**: Vue 组合式工具集
-- **lodash-es 4.17**: JavaScript 工具库
-- **dayjs 1.11**: 日期处理库
-
-### 特殊功能
-- **echarts 5.5**: 数据可视化图表
-- **vuedraggable 4.1**: 拖拽功能
-- **qrcode 1.5**: 二维码生成
-- **marked 17.0**: Markdown 解析器
-
-### 开发工具
-- **Vite 5.1**: 构建工具
-- **TypeScript 5.4**: 类型系统
-- **Playwright 1.58**: 端到端测试
-- **ESLint**: 代码检查
-- **unplugin-auto-import**: 自动导入 API
-- **unplugin-vue-components**: 自动导入组件
-
-## 代码质量检查清单
-
-在提交代码前，请确保：
-
-- [ ] TypeScript 类型检查通过 (`npm run build`)
-- [ ] ESLint 检查通过 (`npm run lint`)
-- [ ] 新增组件符合项目设计系统
-- [ ] 纯图标按钮添加了 `aria-label`
-- [ ] 破坏性操作使用了确认对话框
-- [ ] 表单有适当的验证
-- [ ] 复杂逻辑添加了中文注释
-- [ ] 颜色对比度符合 WCAG AA 标准
-- [ ] 键盘导航适用于所有交互元素
+Vue 3 + Vite + Ant Design Vue + TailwindCSS + Pinia + Vue Router + Axios + ECharts + TypeScript + Playwright
