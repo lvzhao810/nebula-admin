@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"/Users/lvzhao/Downloads/项目/ai-poject/nebula-admin\\\" && git status\",\"description\":\"查看 git 状态\"}",
+  "error": "Exit code 128\n致命错误：不是 git 仓库（或者任何父目录）：.git",
+  "timestamp": "2026-03-08T00:57:10.690Z",
+  "retry_count": 1
+}

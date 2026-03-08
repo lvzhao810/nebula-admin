@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+
+# Build outputs
+dist/
+dist-ssr/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+playwright-report/
+test-results/
+test-results/
+screenshots/
+
+# Environment
+.env.local
+.env.*.local
+
+# Debug files
+debug-ai.html
+test-ai.html
+test-ai-with-key.html
+test-complete.html
+test-api.js
+
+# Docs
+docs/
+TypeScript快速上手教程.md
+运行教程.md

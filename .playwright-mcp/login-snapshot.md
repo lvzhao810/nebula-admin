@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e15]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e24]: "N"
+        - heading "Nebula Admin" [level=1] [ref=e25]
+        - paragraph [ref=e26]: 欢迎回来，开启工作之旅
+      - generic [ref=e27]:
+        - generic [ref=e33]:
+          - img "user" [ref=e35]:
+            - img [ref=e36]
+          - textbox "请输入用户名" [ref=e38]: admin
+        - generic [ref=e44]:
+          - img "lock" [ref=e46]:
+            - img [ref=e47]
+          - textbox "请输入密码" [ref=e49]: "123456"
+          - img "eye-invisible" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+        - generic [ref=e55]:
+          - generic [ref=e56] [cursor=pointer]:
+            - checkbox "记住我" [ref=e58]
+            - generic [ref=e60]: 记住我
+          - generic [ref=e61] [cursor=pointer]: 忘记密码？
+        - button "登 录" [ref=e67] [cursor=pointer]:
+          - generic [ref=e68]: 登 录
+      - paragraph [ref=e70]: 默认账号：admin / 密码：123456
+    - paragraph [ref=e72]: © 2024 Nebula Admin. All rights reserved.
+  - generic [ref=e3]:
+    - generic "Toggle devtools panel" [ref=e4] [cursor=pointer]:
+      - img [ref=e5]
+    - generic "Toggle Component Inspector" [ref=e10] [cursor=pointer]:
+      - img [ref=e11]
