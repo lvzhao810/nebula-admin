@@ -14,21 +14,11 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/layouts/BasicLayout.vue'),
-    redirect: '/dashboard',
+    redirect: '/analytics',
     meta: {
       requiresAuth: true,
     },
     children: [
-      {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        meta: {
-          title: '数据概览',
-          icon: 'DashboardOutlined',
-          requiresAuth: true,
-        },
-      },
       {
         path: '/analytics',
         name: 'Analytics',

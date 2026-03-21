@@ -117,7 +117,7 @@ const handleLogin = async () => {
   try {
     await userStore.login(loginForm)
     message.success('登录成功')
-    const redirect = (route.query.redirect as string) || '/dashboard'
+    const redirect = (route.query.redirect as string) || '/analytics'
     router.push(redirect)
   } catch (error: any) {
     message.error(error.message || '登录失败')

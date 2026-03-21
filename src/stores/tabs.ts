@@ -35,13 +35,13 @@ export const useTabsStore = defineStore('tabs', () => {
     } else {
       // 新标签，检查数量限制
       if (tabs.value.length >= TABS_CONFIG.MAX_TABS) {
-        // 移除最久未使用的标签（第一个），但保留 Dashboard
-        const dashboardIndex = tabs.value.findIndex(t => t.key === TABS_CONFIG.ALWAYS_KEEP_ROUTE)
-        if (dashboardIndex === 0) {
+        // 移除最久未使用的标签（第一个），但保留分析仪表板
+        const analyticsIndex = tabs.value.findIndex(t => t.key === TABS_CONFIG.ALWAYS_KEEP_ROUTE)
+        if (analyticsIndex === 0) {
           tabs.value.shift()
         } else {
-          tabs.value.splice(dashboardIndex > 0 ? dashboardIndex : 0, 1)
-          tabs.value.unshift({ key: TABS_CONFIG.ALWAYS_KEEP_ROUTE, title: '仪表盘', path: TABS_CONFIG.ALWAYS_KEEP_ROUTE })
+          tabs.value.splice(analyticsIndex > 0 ? analyticsIndex : 0, 1)
+          tabs.value.unshift({ key: TABS_CONFIG.ALWAYS_KEEP_ROUTE, title: '分析仪表板', path: TABS_CONFIG.ALWAYS_KEEP_ROUTE })
         }
       }
 

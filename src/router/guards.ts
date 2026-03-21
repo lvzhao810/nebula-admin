@@ -19,9 +19,9 @@ export function setupRouterGuard(router: Router) {
       return next(`/login?redirect=${encodeURIComponent(to.fullPath)}`)
     }
 
-    // Redirect to dashboard if already logged in
+    // Redirect to analytics if already logged in
     if (to.path === '/login') {
-      return next({ path: '/dashboard' })
+      return next({ path: '/analytics' })
     }
 
     // If user info exists, proceed

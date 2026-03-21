@@ -112,7 +112,7 @@ function handleCloseOther() {
 async function handleCloseAll() {
   try {
     tabsStore.closeAllTabs()
-    await router.push('/dashboard')
+    await router.push('/analytics')
   } catch (error) {
     console.error('关闭所有标签失败:', error)
     message.error('操作失败')

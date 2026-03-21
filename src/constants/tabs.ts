@@ -12,7 +12,7 @@ export const TABS_CONFIG = {
   EXCLUDED_ROUTES: ['/login', '/404'] as const,
 
   /** 始终保留的标签页路由 */
-  ALWAYS_KEEP_ROUTE: '/dashboard',
+  ALWAYS_KEEP_ROUTE: '/analytics',
 } as const
 
 /** 标签页关闭操作的结果 */
