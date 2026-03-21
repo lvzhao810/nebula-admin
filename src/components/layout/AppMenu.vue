@@ -100,10 +100,10 @@ const menuList = computed(() => {
   }))
 })
 
-function getIconComponent(iconName?: string) {
+function getIconComponent(iconName?: unknown) {
   if (!iconName) return h(AppstoreOutlined)
 
-  const Icon = iconMap[iconName]
+  const Icon = (iconMap as Record<string, any>)[String(iconName)]
 
   // Fallback icons for names that might not exist
   if (!Icon) {
@@ -111,7 +111,7 @@ function getIconComponent(iconName?: string) {
       DragOutlined: AppstoreOutlined,
       InteractionOutlined: AppstoreOutlined,
     }
-    return h(fallbackMap[iconName] || AppstoreOutlined)
+    return h(fallbackMap[String(iconName)] || AppstoreOutlined)
   }
 
   return h(Icon)

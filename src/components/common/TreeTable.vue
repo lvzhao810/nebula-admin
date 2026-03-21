@@ -8,8 +8,8 @@
       row-key="id"
     >
       <template #bodyCell="{ column, record }">
-        <slot :name="column.dataIndex" :record="record">
-          {{ record[column.dataIndex] }}
+        <slot :name="column.dataIndex as string" :record="record">
+          {{ record[column.dataIndex as string] }}
         </slot>
       </template>
     </a-table>

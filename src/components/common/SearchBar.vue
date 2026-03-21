@@ -8,14 +8,14 @@
             <a-input
               v-if="item.type === 'input'"
               v-model:value="model[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="item.placeholder as string"
               allow-clear
             />
             <!-- 选择器 -->
             <a-select
               v-else-if="item.type === 'select'"
               v-model:value="model[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="item.placeholder as string"
               allow-clear
               :options="item.options"
               style="width: 100%"
@@ -24,14 +24,14 @@
             <a-date-picker
               v-else-if="item.type === 'date'"
               v-model:value="model[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="item.placeholder as string"
               style="width: 100%"
             />
             <!-- 日期范围选择器 -->
             <a-range-picker
               v-else-if="item.type === 'daterange'"
               v-model:value="model[item.name]"
-              :placeholder="item.placeholder || ['开始日期', '结束日期']"
+              :placeholder="(item.placeholder as string[]) || ['开始日期', '结束日期']"
               style="width: 100%"
             />
             <!-- 自定义插槽 -->

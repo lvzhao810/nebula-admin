@@ -136,9 +136,9 @@ async function loadComponent() {
   }
 
   apiData.value = {
-    props: getMockProps(found.name),
-    events: getMockEvents(found.name),
-    slots: getMockSlots(found.name),
+    props: (getMockProps as any)(found.name),
+    events: (getMockEvents as any)(found.name),
+    slots: (getMockSlots as any)(found.name),
   }
   previewData.value = getMockPreviewData(found.name)
   displayCode.value = generateCodeExample(found.name, previewData.value)

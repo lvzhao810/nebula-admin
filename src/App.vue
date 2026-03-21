@@ -34,7 +34,7 @@ const antTheme = computed(() => {
         headerHeight: 56,
         siderBg: isDark ? '#1e293b' : '#ffffff',
         bodyBg: isDark ? '#0f172a' : '#f5f7fa',
-      },
+      } as any,
       Menu: {
         colorBgContainer: isDark ? '#1e293b' : '#ffffff',
         colorItemBg: 'transparent',

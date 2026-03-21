@@ -38,7 +38,7 @@
 import { h } from 'vue'
 import { iconMap } from '@/utils/icons'
 
-const props = defineProps<{
+defineProps<{
   items: any[]
 }>()
 
@@ -49,7 +49,7 @@ const emit = defineEmits<{
 // 渲染图标
 const renderIcon = (iconName: string | undefined) => {
   if (!iconName) return null
-  const Icon = iconMap[iconName]
+  const Icon = (iconMap as Record<string, any>)[iconName]
   return Icon ? h(Icon) : null
 }
 

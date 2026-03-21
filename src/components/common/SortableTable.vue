@@ -13,8 +13,8 @@
             ☰
           </span>
         </template>
-        <slot v-else :name="column.key" :record="record">
-          {{ record[column.dataIndex] }}
+        <slot v-else :name="column.key as string" :record="record">
+          {{ record[column.dataIndex as string] }}
         </slot>
       </template>
     </a-table>
@@ -64,31 +64,20 @@ const customRow = (record: any) => {
       'dragging-row': draggedItem.value?.id === record.id,
       'drag-over-row': dragOverItem.value?.id === record.id && draggedItem.value?.id !== record.id,
     },
-    draggable: 'true',
+    draggable: true,
     style: {
       cursor: isDragging.value ? 'grabbing' : 'grab',
     },
-    ondragstart: (e: DragEvent) => handleDragStart(e, record),
+    ondragstart: () => handleDragStart(record),
     ondragend: (e: DragEvent) => handleDragEnd(e),
-    ondragover: (e: DragEvent) => handleDragOver(e, record),
-    ondrop: (e: DragEvent) => handleDrop(e, record),
+    ondragover: () => handleDragOver(record),
+    ondrop: () => handleDrop(record),
   }
 }
 
-const handleDragStart = (e: DragEvent) => {
-  e.stopPropagation()
-  draggedItem.value = tableData.value.find(item => {
-    const tr = (e.target as HTMLElement).closest('tr')
-    return tr && tr.getAttribute('data-row-key') === String(item.id)
-  })
+const handleDragStart = (record: any) => {
+  draggedItem.value = record
   isDragging.value = true
-
-  if (e.dataTransfer) {
-    e.dataTransfer.effectAllowed = 'move'
-    // 设置拖拽图像
-    const target = e.currentTarget as HTMLElement
-    target.style.opacity = '0.4'
-  }
 }
 
 const handleDragEnd = (e: DragEvent) => {
@@ -96,31 +85,16 @@ const handleDragEnd = (e: DragEvent) => {
   draggedItem.value = null
   dragOverItem.value = null
   isDragging.value = false
-
-  const target = e.currentTarget as HTMLElement
-  target.style.opacity = '1'
 }
 
-const handleDragOver = (e: DragEvent) => {
-  e.preventDefault()
-  e.stopPropagation()
-
-  const record = tableData.value.find(item => {
-    const tr = (e.target as HTMLElement).closest('tr')
-    return tr && tr.getAttribute('data-row-key') === String(item.id)
-  })
-
+const handleDragOver = (record: any) => {
   if (record && draggedItem.value?.id !== record?.id) {
     dragOverItem.value = record
   }
 }
 
-const handleDrop = (e: DragEvent, targetRecord: any) => {
-  e.preventDefault()
-  e.stopPropagation()
-
+const handleDrop = (targetRecord: any) => {
   if (!draggedItem.value || draggedItem.value.id === targetRecord.id) {
-    handleDragEnd(e)
     return
   }
 
@@ -128,7 +102,6 @@ const handleDrop = (e: DragEvent, targetRecord: any) => {
   const newIndex = tableData.value.findIndex(item => item.id === targetRecord.id)
 
   if (oldIndex === -1 || newIndex === -1) {
-    handleDragEnd(e)
     return
   }
 
@@ -139,8 +112,6 @@ const handleDrop = (e: DragEvent, targetRecord: any) => {
   tableData.value = newData
   emit('update:dataSource', newData)
   emit('change', newData)
-
-  handleDragEnd(e)
 }
 </script>
 

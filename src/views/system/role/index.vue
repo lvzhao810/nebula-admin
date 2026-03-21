@@ -101,7 +101,7 @@
       <a-tree
         v-model:checkedKeys="checkedKeys"
         checkable
-        :tree-data="permissionTree"
+        :tree-data="(permissionTree as any)"
         :field-names="{ children: 'children', title: 'title', key: 'id' }"
         class="mt-4"
       />
@@ -113,8 +113,17 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { message, Modal } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
-import type { TableProps, FormInstance, TreeProps } from 'ant-design-vue'
+import type { TableColumnType, TreeProps, TablePaginationConfig, FormInstance } from 'ant-design-vue'
 import type { Role } from '@/types'
+import type { RuleObject } from 'ant-design-vue/es/form/interface'
+
+// 权限树节点类型
+interface PermissionNode {
+  id: string
+  title: string
+  children?: PermissionNode[]
+  [key: string]: any
+}
 
 // 搜索表单
 const searchForm = reactive({
@@ -131,7 +140,7 @@ const pagination = reactive({
 })
 
 // 表格列
-const columns = [
+const columns: TableColumnType[] = [
   {
     title: '角色名称',
     dataIndex: 'roleName',
@@ -186,7 +195,7 @@ const formData = reactive({
 })
 
 // 表单规则
-const formRules = {
+const formRules: Record<string, RuleObject[]> = {
   roleName: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
   roleCode: [{ required: true, message: '请输入角色编码', trigger: 'blur' }],
 }
@@ -197,7 +206,7 @@ const currentRole = ref<Role | null>(null)
 const checkedKeys = ref<TreeProps['checkedKeys']>([])
 
 // 权限树数据
-const permissionTree = [
+const permissionTree: PermissionNode[] = [
   {
     id: 'system',
     title: '系统管理',
@@ -308,7 +317,7 @@ const handleReset = () => {
 }
 
 // 表格变化
-const handleTableChange: TableProps['onChange'] = (pag) => {
+const handleTableChange = (pag: TablePaginationConfig) => {
   pagination.current = pag.current || 1
   pagination.pageSize = pag.pageSize || 10
   fetchData()
@@ -322,7 +331,7 @@ const handleAdd = () => {
 }
 
 // 编辑
-const handleEdit = (record: Role) => {
+const handleEdit = (record: Record<string, any>) => {
   isEdit.value = true
   modalVisible.value = true
   Object.assign(formData, {
@@ -335,14 +344,14 @@ const handleEdit = (record: Role) => {
 }
 
 // 权限配置
-const handlePermission = (record: Role) => {
-  currentRole.value = record
+const handlePermission = (record: Record<string, any>) => {
+  currentRole.value = record as Role
   checkedKeys.value = record.permissions || []
   permissionModalVisible.value = true
 }
 
 // 删除
-const handleDelete = (record: Role) => {
+const handleDelete = (record: Record<string, any>) => {
   Modal.confirm({
     title: '确认删除',
     content: `确定要删除角色 "${record.roleName}" 吗？`,

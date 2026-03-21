@@ -12,8 +12,9 @@
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
 import Toolbar from '@/components/common/Toolbar.vue'
+import type { ToolbarButton } from '@/components/common/Toolbar.vue'
 
-const toolbarButtons = [
+const toolbarButtons: ToolbarButton[] = [
   { key: 'add', label: '新增', type: 'primary', icon: 'PlusOutlined' },
   { key: 'edit', label: '编辑', type: 'default', icon: 'EditOutlined' },
   { key: 'delete', label: '删除', type: 'default', danger: true, icon: 'DeleteOutlined' },

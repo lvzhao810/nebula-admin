@@ -69,11 +69,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, h } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { PlusOutlined, DeleteOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
 import { message, Modal } from 'ant-design-vue'
 import CodeViewer from '@/components/common/CodeViewer.vue'
-import { mockUsers, mockFetchUsers } from '@/views/components/mocks'
+import { mockFetchUsers } from '@/views/components/mocks'
 
 // @core: 核心配置代码
 const columns = [

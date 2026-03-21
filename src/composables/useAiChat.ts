@@ -176,90 +176,6 @@ export function useAiChat(options: UseAiChatOptions = {}) {
   }
 
   /**
-   * 获取流式响应（直接更新消息对象）
-   */
-  async function fetchStreamResponse(
-    messageHistory: Array<{role: string, content: string}>,
-    modelConfig: any,
-    storedApiKey: string,
-    aiMessage: ChatMessage
-  ): Promise<boolean> {
-    const requestData = buildRequestData(messageHistory, modelConfig, true)
-
-    console.log('发送流式 API 请求:', {
-      url: modelConfig.apiUrl,
-      model: currentModel.value,
-      stream: true
-    })
-
-    const response = await fetch(modelConfig.apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey.value || storedApiKey}`,
-      },
-      body: JSON.stringify(requestData),
-    })
-
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(`API 请求失败: ${response.status} ${response.statusText}`)
-    }
-
-    // 处理流式响应
-    const reader = response.body?.getReader()
-    const decoder = new TextDecoder()
-
-    if (!reader) {
-      throw new Error('无法读取响应流')
-    }
-
-    let buffer = ''
-    let fullContent = ''
-
-    while (true) {
-      const { done, value } = await reader.read()
-
-      if (done) break
-
-      // 解码数据块
-      buffer += decoder.decode(value, { stream: true })
-
-      // 处理 SSE 格式（data: {...}\n\n）
-      const lines = buffer.split('\n')
-      buffer = lines.pop() || '' // 保留不完整的行
-
-      for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          const data = line.slice(6).trim()
-
-          // 跳过 [DONE] 标记
-          if (data === '[DONE]') continue
-
-          try {
-            const parsed = JSON.parse(data)
-            const content = parseStreamChunk(parsed, currentModel.value)
-
-            if (content) {
-              fullContent += content
-              aiMessage.content = fullContent
-              // 触发响应式更新
-              messages.value = [...messages.value]
-            }
-          } catch (e) {
-            console.warn('解析 SSE 数据失败:', data, e)
-          }
-        }
-      }
-    }
-
-    console.log('流式响应完成，总内容长度:', fullContent.length)
-
-    // 返回是否成功（有内容）
-    return fullContent.length > 0
-  }
-
-  /**
    * 构建 API 请求数据
    */
   function buildRequestData(messageHistory: Array<{role: string, content: string}>, modelConfig: any, stream: boolean = false): any {
@@ -300,7 +216,9 @@ export function useAiChat(options: UseAiChatOptions = {}) {
 
   /**
    * 解析流式响应的数据块
+   * @deprecated 暂未使用，用于未来流式响应功能
    */
+  // @ts-ignore
   function parseStreamChunk(chunk: any, model: AiModel): string | null {
     // 智谱 GLM 流式响应格式
     if (model === 'zhipu') {

@@ -45,7 +45,7 @@
       :loading="submitLoading"
       @ok="handleAddUser"
     >
-      <template #form="{ form }">
+      <template #form>
         <a-form-item label="头像" name="avatar">
           <a-upload
             v-model:file-list="avatarList"

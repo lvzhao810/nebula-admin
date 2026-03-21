@@ -35,9 +35,9 @@
           </template>
           <template v-else-if="column.key === 'action'">
             <a-space>
-              <a-button type="link" size="small" @click="handleAdd(record)">新增子菜单</a-button>
-              <a-button type="link" size="small" @click="handleEdit(record)">编辑</a-button>
-              <a-button type="link" size="small" :danger="true" @click="handleDelete(record)">删除</a-button>
+              <a-button type="link" size="small" @click="handleAdd(record as any)">新增子菜单</a-button>
+              <a-button type="link" size="small" @click="handleEdit(record as any)">编辑</a-button>
+              <a-button type="link" size="small" :danger="true" @click="handleDelete(record as any)">删除</a-button>
             </a-space>
           </template>
         </template>
@@ -131,7 +131,7 @@ const columns = [
     title: '图标',
     key: 'icon',
     width: 80,
-    align: 'center',
+    align: 'center' as const,
   },
   {
     title: '类型',
@@ -158,7 +158,7 @@ const columns = [
     dataIndex: 'sort',
     key: 'sort',
     width: 80,
-    align: 'center',
+    align: 'center' as const,
   },
   {
     title: '状态',
@@ -169,7 +169,7 @@ const columns = [
     title: '操作',
     key: 'action',
     width: 220,
-    fixed: 'right',
+    fixed: 'right' as const,
   },
 ]
 
@@ -194,7 +194,7 @@ const formData = reactive({
 })
 
 // 表单规则
-const formRules = {
+const formRules: Record<string, any[]> = {
   title: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
   path: [
     { required: true, message: '请输入路由路径', trigger: 'blur' },
@@ -309,6 +309,7 @@ const fetchData = async () => {
                 id: 111,
                 parentId: 11,
                 title: '查看',
+                path: '',
                 permission: 'system:user:view',
                 type: 3,
                 sort: 1,
@@ -318,6 +319,7 @@ const fetchData = async () => {
                 id: 112,
                 parentId: 11,
                 title: '新增',
+                path: '',
                 permission: 'system:user:add',
                 type: 3,
                 sort: 2,
@@ -327,6 +329,7 @@ const fetchData = async () => {
                 id: 113,
                 parentId: 11,
                 title: '编辑',
+                path: '',
                 permission: 'system:user:edit',
                 type: 3,
                 sort: 3,
@@ -336,6 +339,7 @@ const fetchData = async () => {
                 id: 114,
                 parentId: 11,
                 title: '删除',
+                path: '',
                 permission: 'system:user:delete',
                 type: 3,
                 sort: 4,

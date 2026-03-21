@@ -48,7 +48,7 @@
             <a-input
               v-if="item.type === 'input'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :allow-clear="item.allowClear !== false"
               size="large"
@@ -63,7 +63,7 @@
             <a-textarea
               v-else-if="item.type === 'textarea'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :rows="item.rows || 4"
               :allow-clear="item.allowClear !== false"
@@ -75,7 +75,7 @@
             <a-input-password
               v-else-if="item.type === 'password'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               size="large"
             >
@@ -88,7 +88,7 @@
             <a-input-number
               v-else-if="item.type === 'number'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :min="item.min"
               :max="item.max"
@@ -101,7 +101,7 @@
             <a-select
               v-else-if="item.type === 'select'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :allow-clear="item.allowClear !== false"
               :mode="item.mode"
@@ -113,7 +113,7 @@
             <a-date-picker
               v-else-if="item.type === 'date'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :format="item.format || 'YYYY-MM-DD'"
               size="large"
@@ -124,7 +124,7 @@
             <a-range-picker
               v-else-if="item.type === 'daterange'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder || ['开始日期', '结束日期']"
+              :placeholder="(item.placeholder as string[]) || ['开始日期', '结束日期']"
               :disabled="item.disabled"
               :format="item.format || 'YYYY-MM-DD'"
               size="large"
@@ -135,7 +135,7 @@
             <a-time-picker
               v-else-if="item.type === 'time'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :format="item.format || 'HH:mm:ss'"
               size="large"
@@ -185,14 +185,14 @@
             <a-tree-select
               v-else-if="item.type === 'tree-select'"
               v-model:value="formData[item.name]"
-              :placeholder="item.placeholder"
+              :placeholder="(item.placeholder as string) || ''"
               :disabled="item.disabled"
               :tree-data="item.options"
               :field-names="item.fieldNames"
               :allow-clear="item.allowClear !== false"
               size="large"
               style="width: 100%"
-              :tree-line="{ show: true }"
+              :tree-line="true"
             />
 
             <!-- 自定义插槽 -->
@@ -225,7 +225,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, useTemplateRef, h } from 'vue'
+import { watch, nextTick, useTemplateRef, h } from 'vue'
 import type { FormInstance } from 'ant-design-vue'
 import {
   CheckCircleOutlined,

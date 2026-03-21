@@ -106,9 +106,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { PlusOutlined, UploadOutlined, DownOutlined, CheckCircleOutlined } from '@ant-design/icons-vue'
 import { Empty, message } from 'ant-design-vue'
+import type { ToolbarButton } from '@/components/common/Toolbar.vue'
 // Toolbar 通过 unplugin-vue-components 自动导入
 import CodeViewer from '@/components/common/CodeViewer.vue'
 
@@ -120,7 +121,7 @@ interface ActionLog {
 }
 
 // @core: 核心配置代码
-const toolbarButtons = [
+const toolbarButtons: ToolbarButton[] = [
   { key: 'add', label: '新增', type: 'primary', icon: 'PlusOutlined' },
   { key: 'edit', label: '编辑', type: 'default', icon: 'EditOutlined' },
   { key: 'delete', label: '删除', type: 'default', danger: true, icon: 'DeleteOutlined' },
@@ -157,13 +158,13 @@ function handleImport() {
   message.info('打开导入对话框')
 }
 
-function handleMenuClick({ key }: { key: string }) {
+function handleMenuClick(info: any) {
   const logMap: Record<string, { action: string; color: string }> = {
     export: { action: '导出数据', color: 'cyan' },
     config: { action: '列设置', color: 'default' },
   }
 
-  const log = logMap[key]
+  const log = logMap[info.key as string]
   if (log) {
     addLog(log.action, log.color)
     message.info('执行: '.concat(log.action))

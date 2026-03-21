@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import type { ComponentDemo } from '../data/components'
 
 const props = defineProps<{

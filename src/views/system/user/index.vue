@@ -108,10 +108,11 @@
 <script setup lang="ts">
 import { reactive, onMounted, computed } from 'vue'
 import { message, Modal } from 'ant-design-vue'
+import type { TableColumnType } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
-import type { UserInfo } from '@/types'
 import { useTable } from '@/composables/useTable'
 import { useFormModal } from '@/composables/useFormModal'
+import type { RuleObject } from 'ant-design-vue/es/form/interface'
 
 // Search form
 const searchForm = reactive({
@@ -120,7 +121,7 @@ const searchForm = reactive({
 })
 
 // Table columns
-const columns = [
+const columns: TableColumnType[] = [
   {
     title: '头像',
     key: 'avatar',
@@ -233,7 +234,7 @@ const fetchUsers = async () => {
 const { dataSource, loading, pagination, fetchData, handleTableChange } = useTable(fetchUsers)
 
 // Form
-const formRules = {
+const formRules: Record<string, RuleObject[]> = {
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
   email: [
@@ -257,7 +258,7 @@ const initialFormData = {
   status: 1,
 }
 
-const { visible: modalVisible, formRef, formData, isEdit, open: openModal, close: closeModal, resetForm } = useFormModal(initialFormData)
+const { visible: modalVisible, formRef, formData, isEdit, open: openModal, close: closeModal } = useFormModal(initialFormData)
 
 // Custom modal title with '用户' suffix
 const modalTitle = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
@@ -278,11 +279,11 @@ const handleAdd = () => {
   openModal()
 }
 
-const handleEdit = (record: UserInfo) => {
+const handleEdit = (record: Record<string, any>) => {
   openModal(record)
 }
 
-const handleDelete = (record: UserInfo) => {
+const handleDelete = (record: Record<string, any>) => {
   Modal.confirm({
     title: '确认删除',
     content: `确定要删除用户 "${record.username}" 吗？`,

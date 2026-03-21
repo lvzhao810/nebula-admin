@@ -35,7 +35,7 @@
 import { h } from 'vue'
 import * as Icons from '@ant-design/icons-vue'
 
-interface ToolbarButton {
+export interface ToolbarButton {
   key: string
   label: string
   type?: 'primary' | 'default' | 'dashed' | 'link' | 'text'

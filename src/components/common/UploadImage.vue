@@ -119,7 +119,7 @@ const handleRemove: UploadProps['onRemove'] = () => {
 
 // 预览
 const handlePreview: UploadProps['onPreview'] = (file) => {
-  previewImage.value = file.url || file.thumbUrl
+  previewImage.value = (file.url || file.thumbUrl || '') as string
   previewVisible.value = true
   previewTitle.value = file.name || '图片预览'
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { categories } from '../data/components'
 import { componentDemos } from '../data/components'
 import {
@@ -43,7 +43,7 @@ function getComponentCount(category: string): number {
 }
 
 function handleTabChange(key: string) {
-  activeCategory.value = key
+  activeCategory.value = key as any
   emit('change', key)
 }
 </script>
