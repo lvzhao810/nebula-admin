@@ -3,46 +3,47 @@
     <!-- 页面标题 -->
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-bold text-gray-800">菜单管理</h1>
-      <a-button type="primary" class="!bg-gradient-nebula !border-0" @click="handleAdd(null)">
-        <template #icon><PlusOutlined /></template>
-        新增菜单
-      </a-button>
     </div>
 
     <!-- 菜单表格 -->
-    <a-card class="shadow-card">
-      <a-table
-        :columns="columns"
-        :data-source="dataSource"
-        :pagination="false"
-        :loading="loading"
-        row-key="id"
-        :default-expand-all-rows="true"
-      >
-        <template #bodyCell="{ column, record }">
-          <template v-if="column.key === 'icon'">
-            <component :is="record.icon" class="text-lg" />
-          </template>
-          <template v-else-if="column.key === 'type'">
-            <a-tag :color="getTypeColor(record.type)">
-              {{ getTypeName(record.type) }}
-            </a-tag>
-          </template>
-          <template v-else-if="column.key === 'status'">
-            <a-tag :color="record.status === 1 ? 'success' : 'error'">
-              {{ record.status === 1 ? '启用' : '禁用' }}
-            </a-tag>
-          </template>
-          <template v-else-if="column.key === 'action'">
-            <a-space>
-              <a-button type="link" size="small" @click="handleAdd(record as any)">新增子菜单</a-button>
-              <a-button type="link" size="small" @click="handleEdit(record as any)">编辑</a-button>
-              <a-button type="link" size="small" :danger="true" @click="handleDelete(record as any)">删除</a-button>
-            </a-space>
-          </template>
+    <ProTable
+      :columns="columns"
+      :data-source="dataSource"
+      :pagination="false"
+      :loading="loading"
+      row-key="id"
+      @refresh="fetchData"
+    >
+      <template #toolbar-left>
+        <a-button type="primary" class="!bg-gradient-nebula !border-0" @click="handleAdd(null)">
+          <template #icon><PlusOutlined /></template>
+          新增菜单
+        </a-button>
+      </template>
+
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'icon'">
+          <component :is="record.icon" class="text-lg" />
         </template>
-      </a-table>
-    </a-card>
+        <template v-else-if="column.key === 'type'">
+          <a-tag :color="getTypeColor(record.type)">
+            {{ getTypeName(record.type) }}
+          </a-tag>
+        </template>
+        <template v-else-if="column.key === 'status'">
+          <a-tag :color="record.status === 1 ? 'success' : 'error'">
+            {{ record.status === 1 ? '启用' : '禁用' }}
+          </a-tag>
+        </template>
+        <template v-else-if="column.key === 'action'">
+          <a-space>
+            <a-button type="link" size="small" @click="handleAdd(record as any)">新增子菜单</a-button>
+            <a-button type="link" size="small" @click="handleEdit(record as any)">编辑</a-button>
+            <a-button type="link" size="small" :danger="true" @click="handleDelete(record as any)">删除</a-button>
+          </a-space>
+        </template>
+      </template>
+    </ProTable>
 
     <!-- 新增/编辑弹窗 -->
     <a-modal
@@ -112,6 +113,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { message, Modal } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
+import ProTable from '@/components/common/ProTable.vue'
 import type { FormInstance } from 'ant-design-vue'
 import type { MenuItem } from '@/types'
 

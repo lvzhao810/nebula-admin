@@ -3,10 +3,6 @@
     <!-- 页面标题 -->
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-bold text-gray-800">用户管理</h1>
-      <a-button type="primary" class="!bg-gradient-nebula !border-0" @click="handleAdd">
-        <template #icon><PlusOutlined /></template>
-        新增用户
-      </a-button>
     </div>
 
     <!-- 搜索栏 -->
@@ -31,35 +27,41 @@
     </a-card>
 
     <!-- 表格 -->
-    <a-card class="shadow-card">
-      <a-table
-        :columns="columns"
-        :data-source="dataSource"
-        :pagination="pagination"
-        :loading="loading"
-        @change="handleTableChange"
-        row-key="id"
-      >
-        <template #bodyCell="{ column, record }">
-          <template v-if="column.key === 'avatar'">
-            <a-avatar :size="32" class="bg-gradient-nebula">
-              {{ record.username?.charAt(0).toUpperCase() }}
-            </a-avatar>
-          </template>
-          <template v-else-if="column.key === 'status'">
-            <a-tag :color="record.status === 1 ? 'success' : 'error'">
-              {{ record.status === 1 ? '启用' : '禁用' }}
-            </a-tag>
-          </template>
-          <template v-else-if="column.key === 'action'">
-            <a-space>
-              <a-button type="link" size="small" @click="handleEdit(record)">编辑</a-button>
-              <a-button type="link" size="small" :danger="true" @click="handleDelete(record)">删除</a-button>
-            </a-space>
-          </template>
+    <ProTable
+      :columns="columns"
+      :data-source="dataSource"
+      :pagination="pagination"
+      :loading="loading"
+      row-key="id"
+      @refresh="fetchData"
+      @change="handleTableChange"
+    >
+      <template #toolbar-left>
+        <a-button type="primary" class="!bg-gradient-nebula !border-0" @click="handleAdd">
+          <template #icon><PlusOutlined /></template>
+          新增用户
+        </a-button>
+      </template>
+
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'avatar'">
+          <a-avatar :size="32" class="bg-gradient-nebula">
+            {{ record.username?.charAt(0).toUpperCase() }}
+          </a-avatar>
         </template>
-      </a-table>
-    </a-card>
+        <template v-else-if="column.key === 'status'">
+          <a-tag :color="record.status === 1 ? 'success' : 'error'">
+            {{ record.status === 1 ? '启用' : '禁用' }}
+          </a-tag>
+        </template>
+        <template v-else-if="column.key === 'action'">
+          <a-space>
+            <a-button type="link" size="small" @click="handleEdit(record)">编辑</a-button>
+            <a-button type="link" size="small" :danger="true" @click="handleDelete(record)">删除</a-button>
+          </a-space>
+        </template>
+      </template>
+    </ProTable>
 
     <!-- 新增/编辑弹窗 -->
     <a-modal
@@ -110,6 +112,7 @@ import { reactive, onMounted, computed } from 'vue'
 import { message, Modal } from 'ant-design-vue'
 import type { TableColumnType } from 'ant-design-vue'
 import { PlusOutlined } from '@ant-design/icons-vue'
+import ProTable from '@/components/common/ProTable.vue'
 import { useTable } from '@/composables/useTable'
 import { useFormModal } from '@/composables/useFormModal'
 import type { RuleObject } from 'ant-design-vue/es/form/interface'

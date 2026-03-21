@@ -1,5 +1,4 @@
 import { ref, reactive } from 'vue'
-import type { TableProps } from 'ant-design-vue'
 
 export function useTable<T = any>(fetchFn: () => Promise<T[]>) {
   const dataSource = ref<T[]>([])
@@ -21,9 +20,9 @@ export function useTable<T = any>(fetchFn: () => Promise<T[]>) {
     }
   }
 
-  const handleTableChange: TableProps['onChange'] = (pag) => {
-    pagination.current = pag.current || 1
-    pagination.pageSize = pag.pageSize || 10
+  const handleTableChange = (pag: any) => {
+    if (pag.current) pagination.current = pag.current
+    if (pag.pageSize) pagination.pageSize = pag.pageSize
     fetchData()
   }
 
